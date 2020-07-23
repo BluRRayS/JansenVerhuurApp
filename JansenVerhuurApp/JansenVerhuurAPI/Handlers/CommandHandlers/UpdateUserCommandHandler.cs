@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace JansenVerhuurAPI.Handlers.CommandHandlers
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserResponse>
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserResponse>
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IMapper mapper, IUserService userService)
+        public UpdateUserCommandHandler(IUserService userService, IMapper mapper)
         {
-            _mapper = mapper;
             _userService = userService;
+            _mapper = mapper;
         }
 
-        public async Task<UserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserResponse> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<User>(request);
-            var createdUser = await _userService.CreateAsync(user);
-            return _mapper.Map<UserResponse>(createdUser);
+            var updatedUser = await _userService.UpdateAsync(user);
+            return _mapper.Map<UserResponse>(updatedUser);
         }
     }
 }

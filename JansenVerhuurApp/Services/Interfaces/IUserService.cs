@@ -1,13 +1,15 @@
-﻿using JansenVerhuurAPI.Domain;
+﻿using Services.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace JansenVerhuurAPI.Services
+namespace Services.Interfaces
 {
     public interface IUserService
     {
         Task<User> GetAsync(int id);
         Task<IEnumerable<User>> GetAllAsync();
-        Task CreateAsync(User user);
+        Task<User> CreateAsync(User user);
+        Task<User> UpdateAsync(User user);
+        Task<bool> DeleteUserAsync(int id);
     }
 }

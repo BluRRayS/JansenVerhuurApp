@@ -7,8 +7,8 @@ namespace Data.Repositories
     {
         Task<TEntity> GetAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task CreateAsync(TEntity entity);
-        Task UpdateAsync(TEntity entity);
+        Task<TEntity> CreateAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
         Task DeleteAsync(int id);
     }
 }

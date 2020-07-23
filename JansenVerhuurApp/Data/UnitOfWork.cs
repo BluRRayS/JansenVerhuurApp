@@ -1,10 +1,7 @@
 ﻿using Data.Repositories.Core;
 using Data.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace Data
 {
@@ -12,7 +9,7 @@ namespace Data
     {
         public UnitOfWork(DatabaseOptions databaseOptions)
         {
-            _connection = new MySqlConnection(databaseOptions.GetConnectionString());           
+            _connection = new MySqlConnection(databaseOptions.GetConnectionString());
         }
 
         private readonly IDbConnection _connection;
@@ -49,7 +46,7 @@ namespace Data
 
         public IUserRepository UserRepository
         {
-            get => new UserRepository(_connection,_transaction);
+            get => new UserRepository(_connection, _transaction);
         }
     }
 }

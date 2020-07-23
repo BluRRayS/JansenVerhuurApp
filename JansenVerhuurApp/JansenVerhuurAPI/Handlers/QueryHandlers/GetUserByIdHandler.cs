@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using JansenVerhuurAPI.Queries;
 using JansenVerhuurAPI.Responses;
-using JansenVerhuurAPI.Services;
 using MediatR;
+using Services.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

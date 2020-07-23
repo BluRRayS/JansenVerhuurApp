@@ -1,10 +1,8 @@
 ﻿using Dapper;
 using Data.Dto;
 using Data.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Repositories.Core
@@ -20,15 +18,19 @@ namespace Data.Repositories.Core
             this.transaction = transaction;
         }
 
-        public async Task CreateAsync (UserDto entity)
+        public async Task<UserDto> CreateAsync(UserDto entity)
         {
-            var sql = "insert into user (Firstname,Lastname,Role,Email,Password,Salt) VALUES(@First,@Last,@Role,@Email,@Password,@Salt)";
-            await connection.ExecuteAsync(sql, new { First = entity.Firstname, Last = entity.Lastname, Role = (int)entity.Role, entity.Email, entity.Password,  entity.Salt },transaction);
+            var sql = @"
+                insert into user (Firstname,Lastname,Role,Email,Password,Salt) VALUES(@First,@Last,@Role,@Email,@Password,@Salt);
+                SELECT LAST_INSERT_ID();";
+            entity.Id = await connection.QueryFirstOrDefaultAsync<int>(sql, new { First = entity.Firstname, Last = entity.Lastname, Role = (int)entity.Role, entity.Email, entity.Password, entity.Salt }, transaction);
+            return entity;
         }
 
-        public async Task DeleteAsync (int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var sql = "DELETE FROM user WHERE Id = @Id";
+            await connection.ExecuteAsync(sql, new { Id = id }, transaction);
         }
 
         public async Task<UserDto> GetAsync(int id)
@@ -41,9 +43,11 @@ namespace Data.Repositories.Core
             return await connection.QueryAsync<UserDto>("SELECT * FROM user", transaction);
         }
 
-        public async Task UpdateAsync (UserDto entity)
+        public async Task<UserDto> UpdateAsync(UserDto entity)
         {
-            throw new NotImplementedException();
+            var sql = "UPDATE user SET Firstname = @Firstname,Lastname = @Lastname, Role= @Role, Email = @Email WHERE Id = @Id";
+            await connection.ExecuteAsync(sql, new { entity.Firstname, entity.Lastname, Role = (int)entity.Role, entity.Email, entity.Id }, transaction);
+            return entity;
         }
     }
 }

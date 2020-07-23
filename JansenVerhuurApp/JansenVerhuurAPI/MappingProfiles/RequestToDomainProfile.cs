@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using JansenVerhuurAPI.Commands;
-using JansenVerhuurAPI.Domain;
-using JansenVerhuurAPI.Enums;
+using Services.Domain;
+using Services.Enums;
 
 namespace JansenVerhuurAPI.MappingProfiles
 {
@@ -10,6 +10,9 @@ namespace JansenVerhuurAPI.MappingProfiles
         public RequestToDomainProfile()
         {
             CreateMap<CreateUserCommand, User>().ForMember(dest => dest.Role,
+            opt => opt.MapFrom(src => (Role)src.Role));
+
+            CreateMap<UpdateUserCommand, User>().ForMember(dest => dest.Role,
             opt => opt.MapFrom(src => (Role)src.Role));
         }
     }

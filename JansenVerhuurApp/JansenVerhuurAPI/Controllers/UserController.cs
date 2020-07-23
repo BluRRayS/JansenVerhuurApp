@@ -4,6 +4,7 @@ using JansenVerhuurAPI.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Services.Exceptions;
 using System.Threading.Tasks;
 
 namespace JansenVerhuurAPI.Controllers
@@ -44,6 +45,29 @@ namespace JansenVerhuurAPI.Controllers
         {
             var result = await _mediator.Send(command);
             return CreatedAtAction(nameof(User), new { id = result.Id }, result);
+        }
+
+        [HttpDelete(template: "/Delete/{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var result = await _mediator.Send(new DeleteUserCommand() { Id = id });
+            if (!result) return NotFound();
+            return Ok();
+        }
+
+        [HttpPut(template: "/Update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        {
+            try
+            {
+                var result = await _mediator.Send(command);
+                return CreatedAtAction(nameof(User), new { id = result.Id }, result);
+            }
+            catch (NotFoundException)
+            {
+                _logger.LogWarning("Could not find user with Id: " + command.Id + " when updating");
+                return NotFound();
+            }
         }
 
     }
