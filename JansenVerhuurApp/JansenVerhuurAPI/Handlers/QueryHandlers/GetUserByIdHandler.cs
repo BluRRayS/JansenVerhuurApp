@@ -2,7 +2,7 @@
 using JansenVerhuurAPI.Queries;
 using JansenVerhuurAPI.Responses;
 using MediatR;
-using Services.Interfaces;
+using JansenVerhuurAPI.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

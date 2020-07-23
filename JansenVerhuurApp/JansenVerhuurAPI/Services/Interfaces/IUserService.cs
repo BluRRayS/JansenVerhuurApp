@@ -1,8 +1,8 @@
-﻿using Services.Domain;
+﻿using JansenVerhuurAPI.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Services.Interfaces
+namespace JansenVerhuurAPI.Interfaces
 {
     public interface IUserService
     {

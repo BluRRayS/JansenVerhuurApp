@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Services.Interfaces;
+using JansenVerhuurAPI.Interfaces;
+using FluentValidation;
+using JansenVerhuurAPI.PipelineBehaviours;
+using JansenVerhuurAPI.Middleware;
 
 namespace JansenVerhuurAPI
 {
@@ -29,7 +32,12 @@ namespace JansenVerhuurAPI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(typeof(Startup));
+            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddScoped<IUserService, UserService>();
+
+
             services.AddSwaggerGen();
         }
 
@@ -55,6 +63,8 @@ namespace JansenVerhuurAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ValidationMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Data;
 using Data.Dto;
-using Services.Domain;
-using Services.Exceptions;
-using Services.Interfaces;
+using JansenVerhuurAPI.Domain;
+using JansenVerhuurAPI.Exceptions;
+using JansenVerhuurAPI.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

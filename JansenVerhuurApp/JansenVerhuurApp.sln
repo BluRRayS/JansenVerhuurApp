@@ -10,11 +10,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JansenVerhuurAPI", "JansenV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{35A887D1-CA40-4C0E-B029-C24506C322CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{2C5C80AD-78DF-4F2B-A20A-B3F26E3AA95D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{35A887D1-CA40-4C0E-B029-C24506C322CE} = {35A887D1-CA40-4C0E-B029-C24506C322CE}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +24,6 @@ Global
 		{35A887D1-CA40-4C0E-B029-C24506C322CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A887D1-CA40-4C0E-B029-C24506C322CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A887D1-CA40-4C0E-B029-C24506C322CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C5C80AD-78DF-4F2B-A20A-B3F26E3AA95D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C5C80AD-78DF-4F2B-A20A-B3F26E3AA95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C5C80AD-78DF-4F2B-A20A-B3F26E3AA95D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C5C80AD-78DF-4F2B-A20A-B3F26E3AA95D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

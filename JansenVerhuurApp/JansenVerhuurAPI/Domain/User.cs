@@ -1,6 +1,6 @@
-﻿using Services.Enums;
+﻿using JansenVerhuurAPI.Enums;
 
-namespace Services.Domain
+namespace JansenVerhuurAPI.Domain
 {
     public class User
     {

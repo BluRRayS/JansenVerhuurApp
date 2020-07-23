@@ -1,4 +1,4 @@
-﻿using Services.Enums;
+﻿using JansenVerhuurAPI.Enums;
 
 namespace JansenVerhuurAPI.Responses
 {

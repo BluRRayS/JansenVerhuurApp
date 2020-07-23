@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using JansenVerhuurAPI.Commands;
-using Services.Domain;
-using Services.Enums;
+using JansenVerhuurAPI.Domain;
+using JansenVerhuurAPI.Enums;
 
 namespace JansenVerhuurAPI.MappingProfiles
 {

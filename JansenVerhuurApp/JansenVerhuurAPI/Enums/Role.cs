@@ -1,4 +1,4 @@
-﻿namespace Services.Enums
+﻿namespace JansenVerhuurAPI.Enums
 {
     public enum Role
     {
