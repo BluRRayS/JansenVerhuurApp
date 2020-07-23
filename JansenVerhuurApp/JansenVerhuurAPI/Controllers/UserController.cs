@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-using JansenVerhuurAPI.Commands;
+﻿using JansenVerhuurAPI.Commands;
+using JansenVerhuurAPI.Exceptions;
 using JansenVerhuurAPI.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using JansenVerhuurAPI.Exceptions;
 using System.Threading.Tasks;
 
 namespace JansenVerhuurAPI.Controllers
@@ -15,13 +14,11 @@ namespace JansenVerhuurAPI.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public UserController(ILogger<UserController> logger, IMediator mediator, IMapper mapper)
+        public UserController(ILogger<UserController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         [HttpGet(template: "")]
@@ -33,7 +30,7 @@ namespace JansenVerhuurAPI.Controllers
         }
 
         [HttpGet(template: "{id}")]
-        public async Task<IActionResult> User(int id)
+        public async Task<IActionResult> UserById(int id)
         {
             var query = new GetUserByIdQuery(id);
             var result = await _mediator.Send(query);

@@ -1,6 +1,6 @@
 ﻿using JansenVerhuurAPI.Commands;
-using MediatR;
 using JansenVerhuurAPI.Interfaces;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,5 +1,9 @@
 using AutoMapper;
 using Data;
+using FluentValidation;
+using JansenVerhuurAPI.Interfaces;
+using JansenVerhuurAPI.Middleware;
+using JansenVerhuurAPI.PipelineBehaviours;
 using JansenVerhuurAPI.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -7,10 +11,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using JansenVerhuurAPI.Interfaces;
-using FluentValidation;
-using JansenVerhuurAPI.PipelineBehaviours;
-using JansenVerhuurAPI.Middleware;
 
 namespace JansenVerhuurAPI
 {

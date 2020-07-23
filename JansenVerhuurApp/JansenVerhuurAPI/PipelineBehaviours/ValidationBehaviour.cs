@@ -29,7 +29,7 @@ namespace JansenVerhuurAPI.PipelineBehaviours
             {
                 throw new ValidationException(failures);
             }
-            
+
             return await next();
         }
     }
