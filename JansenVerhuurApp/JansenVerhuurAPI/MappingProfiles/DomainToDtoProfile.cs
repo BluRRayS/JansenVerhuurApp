@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data.Dto;
-using JansenVerhuurAPI.Domain;
+using Services.Models;
 
 namespace JansenVerhuurAPI.MappingProfiles
 {

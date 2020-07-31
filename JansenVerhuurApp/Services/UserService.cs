@@ -1,18 +1,18 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using Data;
 using Data.Dto;
-using JansenVerhuurAPI.Domain;
-using JansenVerhuurAPI.Exceptions;
-using JansenVerhuurAPI.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Services.Exceptions;
+using Services.Interfaces;
+using Services.Models;
 
-namespace JansenVerhuurAPI.Services
+namespace Services
 {
     public class UserService : IUserService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
         public UserService(IUnitOfWork unitOfWork, IMapper mapper)
         {

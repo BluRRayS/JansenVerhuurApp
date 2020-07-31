@@ -1,9 +1,9 @@
-﻿using FluentValidation;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using FluentValidation;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace JansenVerhuurAPI.Middleware
 {
@@ -25,7 +25,6 @@ namespace JansenVerhuurAPI.Middleware
             }
             catch (ValidationException ex)
             {
-
                 // Todo Improve validation middleware;
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 var originBody = httpContext.Response.Body;
@@ -40,7 +39,7 @@ namespace JansenVerhuurAPI.Middleware
                     var responseBody = new StreamReader(memStream).ReadToEnd();
 
                     //Custom logic to modify response
-                    responseBody = ex.Message.ToString();
+                    responseBody = ex.Message;
 
                     var memoryStreamModified = new MemoryStream();
                     var sw = new StreamWriter(memoryStreamModified);
@@ -52,9 +51,9 @@ namespace JansenVerhuurAPI.Middleware
                 }
                 catch (Exception)
                 {
-
                     Console.WriteLine("Could not set body of response!");
                 }
+
                 httpContext.Response.Body = originBody;
             }
         }

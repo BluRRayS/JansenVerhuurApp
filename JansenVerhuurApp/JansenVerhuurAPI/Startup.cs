@@ -1,20 +1,17 @@
 using AutoMapper;
-using Data;
 using FluentValidation;
 using JansenVerhuurAPI.Installers;
-using JansenVerhuurAPI.Interfaces;
 using JansenVerhuurAPI.Middleware;
 using JansenVerhuurAPI.Options;
 using JansenVerhuurAPI.PipelineBehaviours;
-using JansenVerhuurAPI.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Linq;
+using Services;
+using Services.Interfaces;
 
 namespace JansenVerhuurAPI
 {
@@ -32,21 +29,17 @@ namespace JansenVerhuurAPI
         {
             services.InstallServicesInAssembly(Configuration);
             services.AddAutoMapper(typeof(Startup));
-            
+
             services.AddMediatR(typeof(Startup));
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
@@ -59,19 +52,17 @@ namespace JansenVerhuurAPI
             });
 
 
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
             app.UseMiddleware<ValidationMiddleware>();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

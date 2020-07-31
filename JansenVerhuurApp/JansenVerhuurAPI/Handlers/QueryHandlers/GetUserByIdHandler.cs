@@ -1,17 +1,17 @@
-﻿using AutoMapper;
-using JansenVerhuurAPI.Interfaces;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using JansenVerhuurAPI.Queries;
 using JansenVerhuurAPI.Responses;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+using Services.Interfaces;
 
 namespace JansenVerhuurAPI.Handlers.QueryHandlers
 {
     public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserResponse>
     {
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
         public GetUserByIdHandler(IUserService userService, IMapper mapper)
         {

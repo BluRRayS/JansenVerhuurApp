@@ -1,7 +1,7 @@
-﻿using Data.Repositories.Core;
+﻿using System.Data;
+using Data.Repositories.Core;
 using Data.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-using System.Data;
 
 namespace Data
 {
@@ -9,44 +9,38 @@ namespace Data
     {
         public UnitOfWork(DatabaseOptions databaseOptions)
         {
-            _connection = new MySqlConnection(databaseOptions.GetConnectionString());
+            Connection = new MySqlConnection(databaseOptions.GetConnectionString());
         }
 
-        private readonly IDbConnection _connection;
-        private IDbTransaction _transaction;
+        public IDbConnection Connection { get; }
 
-        public IDbConnection Connection { get { return _connection; } }
-
-        public IDbTransaction Transaction { get { return _transaction; } }
+        public IDbTransaction Transaction { get; private set; }
 
 
         public void Begin()
         {
-            _transaction = _connection.BeginTransaction();
+            Transaction = Connection.BeginTransaction();
         }
 
         public void Commit()
         {
-            _transaction.Commit();
+            Transaction.Commit();
             Dispose();
         }
 
         public void Dispose()
         {
-            if (_transaction != null)
-                _transaction.Dispose();
-            _transaction = null;
+            if (Transaction != null)
+                Transaction.Dispose();
+            Transaction = null;
         }
 
         public void Rollback()
         {
-            _transaction.Rollback();
+            Transaction.Rollback();
             Dispose();
         }
 
-        public IUserRepository UserRepository
-        {
-            get => new UserRepository(_connection, _transaction);
-        }
+        public IUserRepository UserRepository => new UserRepository(Connection, Transaction);
     }
 }

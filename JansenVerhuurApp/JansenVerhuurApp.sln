@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JansenVerhuurAPI", "JansenV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{35A887D1-CA40-4C0E-B029-C24506C322CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{F03252EA-D3BF-431F-959D-ACBA1FB0CF70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,11 +26,17 @@ Global
 		{35A887D1-CA40-4C0E-B029-C24506C322CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A887D1-CA40-4C0E-B029-C24506C322CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A887D1-CA40-4C0E-B029-C24506C322CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F03252EA-D3BF-431F-959D-ACBA1FB0CF70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F03252EA-D3BF-431F-959D-ACBA1FB0CF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F03252EA-D3BF-431F-959D-ACBA1FB0CF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F03252EA-D3BF-431F-959D-ACBA1FB0CF70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87F827EC-89E0-476B-9507-AACEB25BD03C}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal

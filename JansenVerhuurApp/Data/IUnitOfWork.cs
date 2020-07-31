@@ -1,6 +1,6 @@
-﻿using Data.Repositories.Interfaces;
-using System;
+﻿using System;
 using System.Data;
+using Data.Repositories.Interfaces;
 
 namespace Data
 {
@@ -8,10 +8,10 @@ namespace Data
     {
         IDbConnection Connection { get; }
         IDbTransaction Transaction { get; }
+
+        IUserRepository UserRepository { get; }
         void Begin();
         void Commit();
         void Rollback();
-
-        IUserRepository UserRepository { get; }
     }
 }

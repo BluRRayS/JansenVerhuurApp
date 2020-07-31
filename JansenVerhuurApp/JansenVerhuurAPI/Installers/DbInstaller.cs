@@ -1,11 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Data;
+﻿using Data;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace JansenVerhuurAPI.Installers
 {

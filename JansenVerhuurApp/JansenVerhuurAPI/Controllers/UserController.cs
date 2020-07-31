@@ -1,15 +1,14 @@
-﻿using JansenVerhuurAPI.Commands;
-using JansenVerhuurAPI.Exceptions;
+﻿using System.Threading.Tasks;
+using JansenVerhuurAPI.Commands;
 using JansenVerhuurAPI.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
+using Services.Exceptions;
 
 namespace JansenVerhuurAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -21,44 +20,44 @@ namespace JansenVerhuurAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(template: "")]
+        [HttpGet(ApiRoutes.User.GetAll)]
         public async Task<IActionResult> Users()
         {
             var query = new GetAllUsersQuery();
             var result = await _mediator.Send(query);
-            return result != null ? (IActionResult)Ok(result) : NotFound();
+            return result != null ? (IActionResult) Ok(result) : NotFound();
         }
 
-        [HttpGet(template: "{id}")]
+        [HttpGet(ApiRoutes.User.Get)]
         public async Task<IActionResult> UserById(int id)
         {
             var query = new GetUserByIdQuery(id);
             var result = await _mediator.Send(query);
-            return result != null ? (IActionResult)Ok(result) : NotFound();
+            return result != null ? (IActionResult) Ok(result) : NotFound();
         }
 
-        [HttpPost(template: "/Create")]
+        [HttpPost(ApiRoutes.User.Create)]
         public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(nameof(User), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(UserById), new {id = result.Id}, result);
         }
 
-        [HttpDelete(template: "/Delete/{id}")]
+        [HttpDelete(ApiRoutes.User.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _mediator.Send(new DeleteUserCommand() { Id = id });
+            var result = await _mediator.Send(new DeleteUserCommand {Id = id});
             if (!result) return NotFound();
             return Ok();
         }
 
-        [HttpPut(template: "/Update")]
+        [HttpPut(ApiRoutes.User.Update)]
         public async Task<IActionResult> Update([FromBody] UpdateUserCommand command)
         {
             try
             {
                 var result = await _mediator.Send(command);
-                return CreatedAtAction(nameof(User), new { id = result.Id }, result);
+                return CreatedAtAction(nameof(UserById), new {id = result.Id}, result);
             }
             catch (NotFoundException)
             {
@@ -66,6 +65,5 @@ namespace JansenVerhuurAPI.Controllers
                 return NotFound();
             }
         }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Data.Dto;
-using JansenVerhuurAPI.Domain;
-using JansenVerhuurAPI.Enums;
+using Services.Enums;
+using Services.Models;
 
 namespace JansenVerhuurAPI.MappingProfiles
 {
@@ -10,8 +10,8 @@ namespace JansenVerhuurAPI.MappingProfiles
         public DtoToDomainProfile()
         {
             CreateMap<UserDto, User>().ForMember(dest =>
-            dest.Role,
-            opt => opt.MapFrom(src => (Role)src.Role));
+                    dest.Role,
+                opt => opt.MapFrom(src => (Role) src.Role));
         }
     }
 }
