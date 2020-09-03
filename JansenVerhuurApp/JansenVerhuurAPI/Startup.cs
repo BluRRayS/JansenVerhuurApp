@@ -1,16 +1,17 @@
 using AutoMapper;
-using Data;
 using FluentValidation;
-using JansenVerhuurAPI.Interfaces;
+using JansenVerhuurAPI.Installers;
 using JansenVerhuurAPI.Middleware;
+using JansenVerhuurAPI.Options;
 using JansenVerhuurAPI.PipelineBehaviours;
-using JansenVerhuurAPI.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services;
+using Services.Interfaces;
 
 namespace JansenVerhuurAPI
 {
@@ -26,35 +27,28 @@ namespace JansenVerhuurAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
-            services.AddTransient(_ => new DatabaseOptions(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.InstallServicesInAssembly(Configuration);
             services.AddAutoMapper(typeof(Startup));
+
             services.AddMediatR(typeof(Startup));
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            services.AddScoped<IUserService, UserService>();
-
-
-            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-            app.UseSwagger();
+            var swaggerOptions = new SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
-            app.UseSwaggerUI(c =>
+            app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
+
+            app.UseSwaggerUI(option =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                c.RoutePrefix = string.Empty;
+                option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
             });
 
 
@@ -62,14 +56,13 @@ namespace JansenVerhuurAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseMiddleware<ValidationMiddleware>();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using FluentValidation;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
+using MediatR;
 
 namespace JansenVerhuurAPI.PipelineBehaviours
 {
@@ -17,7 +17,8 @@ namespace JansenVerhuurAPI.PipelineBehaviours
             _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
             var failures = _validators
                 .Select(x => x.Validate(request))
@@ -25,10 +26,7 @@ namespace JansenVerhuurAPI.PipelineBehaviours
                 .Where(x => x != null)
                 .ToList();
 
-            if (failures.Any())
-            {
-                throw new ValidationException(failures);
-            }
+            if (failures.Any()) throw new ValidationException(failures);
 
             return await next();
         }

@@ -1,8 +1,8 @@
-﻿using JansenVerhuurAPI.Commands;
-using JansenVerhuurAPI.Interfaces;
-using MediatR;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using JansenVerhuurAPI.Commands;
+using MediatR;
+using Services.Interfaces;
 
 namespace JansenVerhuurAPI.Handlers.CommandHandlers
 {

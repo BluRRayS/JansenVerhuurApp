@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JansenVerhuurAPI.Exceptions
+namespace Services.Exceptions
 {
     public class NotFoundException : Exception
     {

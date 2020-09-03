@@ -1,18 +1,18 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using JansenVerhuurAPI.Commands;
-using JansenVerhuurAPI.Domain;
-using JansenVerhuurAPI.Interfaces;
 using JansenVerhuurAPI.Responses;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+using Services.Interfaces;
+using Services.Models;
 
 namespace JansenVerhuurAPI.Handlers.CommandHandlers
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserResponse>
     {
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
         public CreateUserCommandHandler(IMapper mapper, IUserService userService)
         {
