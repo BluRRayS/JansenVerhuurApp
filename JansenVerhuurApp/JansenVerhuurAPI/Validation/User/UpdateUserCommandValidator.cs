@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
-using JansenVerhuurAPI.Commands;
 using JansenVerhuurAPI.Commands.User;
 
 namespace JansenVerhuurAPI.Validation.User
 {
-    public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+    public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
     {
-        public CreateUserCommandValidator()
+        public UpdateUserCommandValidator()
         {
             RuleFor(x => x.Firstname).NotEmpty().MaximumLength(50);
             RuleFor(x => x.Middlename).MaximumLength(50);

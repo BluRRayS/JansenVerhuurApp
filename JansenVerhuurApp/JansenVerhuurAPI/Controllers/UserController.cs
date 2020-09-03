@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using JansenVerhuurAPI.Commands;
+using JansenVerhuurAPI.Commands.User;
 using JansenVerhuurAPI.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Exceptions;
@@ -9,6 +11,7 @@ using Services.Exceptions;
 namespace JansenVerhuurAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;

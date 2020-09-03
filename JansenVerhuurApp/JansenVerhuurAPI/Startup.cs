@@ -5,6 +5,8 @@ using JansenVerhuurAPI.Middleware;
 using JansenVerhuurAPI.Options;
 using JansenVerhuurAPI.PipelineBehaviours;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -60,9 +62,18 @@ namespace JansenVerhuurAPI
 
             app.UseAuthorization();
 
+
             app.UseMiddleware<ValidationMiddleware>();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            if (!Configuration.GetValue<bool>("Authenticate"))
+            {
+                app.UseEndpoints(endpoints => endpoints.MapControllers().WithMetadata(new AllowAnonymousAttribute()));
+            }
+            else
+            {
+                app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            }
         }
     }
 }

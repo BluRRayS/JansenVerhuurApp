@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using JansenVerhuurAPI.Commands;
+using JansenVerhuurAPI.Commands.User;
 using JansenVerhuurAPI.Responses;
 using MediatR;
 using Services.Interfaces;
-using Services.Models;
 
-namespace JansenVerhuurAPI.Handlers.CommandHandlers
+namespace JansenVerhuurAPI.Handlers.CommandHandlers.User
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserResponse>
     {
@@ -22,7 +22,7 @@ namespace JansenVerhuurAPI.Handlers.CommandHandlers
 
         public async Task<UserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<User>(request);
+            var user = _mapper.Map<Services.Models.User>(request);
             var createdUser = await _userService.CreateAsync(user);
             return _mapper.Map<UserResponse>(createdUser);
         }

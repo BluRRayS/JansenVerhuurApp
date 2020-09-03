@@ -1,10 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using JansenVerhuurAPI.Commands;
+using JansenVerhuurAPI.Commands.User;
 using MediatR;
 using Services.Interfaces;
 
-namespace JansenVerhuurAPI.Handlers.CommandHandlers
+namespace JansenVerhuurAPI.Handlers.CommandHandlers.User
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, bool>
     {

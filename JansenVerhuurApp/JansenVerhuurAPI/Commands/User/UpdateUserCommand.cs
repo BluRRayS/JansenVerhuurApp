@@ -1,7 +1,7 @@
 ﻿using JansenVerhuurAPI.Responses;
 using MediatR;
 
-namespace JansenVerhuurAPI.Commands
+namespace JansenVerhuurAPI.Commands.User
 {
     public class UpdateUserCommand : IRequest<UserResponse>
     {

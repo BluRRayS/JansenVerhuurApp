@@ -10,5 +10,10 @@
             public const string Update = "/Users/Update";
             public const string Delete = "/Users/Delete";
         }
+        
+        public static class Auth
+        {
+            public const string Login = "/Login";
+        }
     }
 }

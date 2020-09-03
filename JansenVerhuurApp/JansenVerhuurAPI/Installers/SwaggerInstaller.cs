@@ -13,7 +13,7 @@ namespace JansenVerhuurAPI.Installers
             {
                 x.SwaggerDoc("v1", new OpenApiInfo {Title = "Jansen Verhuur API", Version = "v1"});
 
-
+                if (!configuration.GetValue<bool>("Authenticate")) return;
                 x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the bearer scheme",
@@ -35,7 +35,6 @@ namespace JansenVerhuurAPI.Installers
                         new List<string>()
                     }
                 });
-
                 //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 //x.IncludeXmlComments(xmlPath);

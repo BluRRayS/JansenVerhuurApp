@@ -6,7 +6,7 @@ using JansenVerhuurAPI.Responses;
 using MediatR;
 using Services.Interfaces;
 
-namespace JansenVerhuurAPI.Handlers.QueryHandlers
+namespace JansenVerhuurAPI.Handlers.QueryHandlers.User
 {
     public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserResponse>
     {

@@ -11,5 +11,6 @@ namespace Services.Interfaces
         Task<User> CreateAsync(User user);
         Task<User> UpdateAsync(User user);
         Task<bool> DeleteUserAsync(int id);
+        Task<User> GetByEmailAsync(string email);
     }
 }

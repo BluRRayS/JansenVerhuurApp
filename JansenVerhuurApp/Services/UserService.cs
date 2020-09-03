@@ -53,5 +53,11 @@ namespace Services
             await _unitOfWork.UserRepository.DeleteAsync(id);
             return true;
         }
+
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+            return _mapper.Map<User>(user);
+        }
     }
 }

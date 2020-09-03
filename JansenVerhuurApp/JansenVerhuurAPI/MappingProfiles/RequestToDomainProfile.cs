@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JansenVerhuurAPI.Commands;
+using JansenVerhuurAPI.Commands.User;
 using Services.Enums;
 using Services.Models;
 
